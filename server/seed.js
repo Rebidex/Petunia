@@ -72,7 +72,7 @@ const createProducts = () => [
     description: 'Trandafiri albi si irisi intr-un ambalaj ivoire',
     price: 96,
     category: 'mix',
-    imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80',
+    imageUrl: 'https://iflori.ro/wp-content/uploads/2024/01/white-roses-with-iris-bouquet-527035.jpg',
     stock: 8,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -83,7 +83,7 @@ const createProducts = () => [
     description: 'Bujori premium in nuante blush',
     price: 129,
     category: 'bujori',
-    imageUrl: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=800&q=80',
+    imageUrl: 'https://avenuedesroses.ro/wp-content/uploads/2023/02/buchet-101-bujori-.jpg',
     stock: 10,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -94,7 +94,7 @@ const createProducts = () => [
     description: 'Aranjament colorat pentru orice ocazie',
     price: 59.99,
     category: 'crizanteme',
-    imageUrl: 'https://images.unsplash.com/photo-1572451479139-6a308211d8be?w=800&q=80',
+    imageUrl: 'https://www.baiatulcuflori.ro/pub/media/wysiwyg/buchet-de-crizanteme-autumn-spirit.jpg',
     stock: 25,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -105,7 +105,7 @@ const createProducts = () => [
     description: 'Iriși albastri cu accent natural verde',
     price: 69,
     category: 'iris',
-    imageUrl: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=800&q=80',
+    imageUrl: 'https://www.prietenulgradinii.ro/cdn/products/bulb-iris-albastru-galben-pitic-bleumarin-bip002-6145.webp',
     stock: 18,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -116,7 +116,7 @@ const createProducts = () => [
     description: 'Aranjament minimalist cu eucalipt si flori albe',
     price: 54,
     category: 'verdeata',
-    imageUrl: 'https://images.unsplash.com/photo-1526045478516-99145907023c?w=800&q=80',
+    imageUrl: 'https://s13emagst.akamaized.net/products/91446/91445665/images/res_302acd0d7b2eda92153584a43202d41d.jpg',
     stock: 30,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -127,7 +127,7 @@ const createProducts = () => [
     description: 'Mix de trandafiri, lalele si crizanteme in tonuri calde',
     price: 99.5,
     category: 'mix',
-    imageUrl: 'https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=800&q=80',
+    imageUrl: 'https://s13emagst.akamaized.net/products/13315/13314410/images/res_0bc39eb706184f776374b6bb9d4f5e93.jpg',
     stock: 12,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -138,7 +138,7 @@ const createProducts = () => [
     description: 'Planta decorativa pentru interior',
     price: 110,
     category: 'plante',
-    imageUrl: 'https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80',
+    imageUrl: 'https://s13emagst.akamaized.net/products/68060/68059414/images/res_3ed7cda9af334d44e6e0e634c6ad4d71.png',
     stock: 7,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -149,7 +149,7 @@ const createProducts = () => [
     description: 'Compozitie exuberanta pentru evenimente',
     price: 145,
     category: 'mix',
-    imageUrl: 'https://images.unsplash.com/photo-1487530811015-780780169a86?w=800&q=80',
+    imageUrl: 'https://gomagcdn.ro/domains/alteflori.ro/files/product/original/buchet-de-festival-335024.png',
     stock: 6,
     isAvailable: true,
     createdAt: new Date().toISOString()
