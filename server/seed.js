@@ -50,7 +50,7 @@ const createProducts = () => [
     description: '12 trandafiri rosii cu eucalipt proaspat',
     price: 89.99,
     category: 'trandafiri',
-    imageUrl: 'https://source.unsplash.com/800x600/?rose,bouquet',
+    imageUrl: 'https://images.unsplash.com/photo-1520763185298-1b434c919102?w=800&q=80',
     stock: 15,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -61,7 +61,7 @@ const createProducts = () => [
     description: 'Mix de lalele si gypsophila',
     price: 74.5,
     category: 'lalele',
-    imageUrl: 'https://source.unsplash.com/800x600/?tulips,flowers',
+    imageUrl: 'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=800&q=80',
     stock: 20,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -72,7 +72,7 @@ const createProducts = () => [
     description: 'Trandafiri albi si irisi intr-un ambalaj ivoire',
     price: 96,
     category: 'mix',
-    imageUrl: 'https://source.unsplash.com/800x600/?white-flowers,bouquet',
+    imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80',
     stock: 8,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -83,7 +83,7 @@ const createProducts = () => [
     description: 'Bujori premium in nuante blush',
     price: 129,
     category: 'bujori',
-    imageUrl: 'https://source.unsplash.com/800x600/?peonies',
+    imageUrl: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=800&q=80',
     stock: 10,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -94,7 +94,7 @@ const createProducts = () => [
     description: 'Aranjament colorat pentru orice ocazie',
     price: 59.99,
     category: 'crizanteme',
-    imageUrl: 'https://source.unsplash.com/800x600/?chrysanthemum,flowers',
+    imageUrl: 'https://images.unsplash.com/photo-1572451479139-6a308211d8be?w=800&q=80',
     stock: 25,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -105,7 +105,7 @@ const createProducts = () => [
     description: 'Iriși albastri cu accent natural verde',
     price: 69,
     category: 'iris',
-    imageUrl: 'https://source.unsplash.com/800x600/?iris,flower',
+    imageUrl: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=800&q=80',
     stock: 18,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -116,7 +116,7 @@ const createProducts = () => [
     description: 'Aranjament minimalist cu eucalipt si flori albe',
     price: 54,
     category: 'verdeata',
-    imageUrl: 'https://source.unsplash.com/800x600/?eucalyptus,flowers',
+    imageUrl: 'https://images.unsplash.com/photo-1526045478516-99145907023c?w=800&q=80',
     stock: 30,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -127,7 +127,7 @@ const createProducts = () => [
     description: 'Mix de trandafiri, lalele si crizanteme in tonuri calde',
     price: 99.5,
     category: 'mix',
-    imageUrl: 'https://source.unsplash.com/800x600/?flower-arrangement',
+    imageUrl: 'https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=800&q=80',
     stock: 12,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -138,7 +138,7 @@ const createProducts = () => [
     description: 'Planta decorativa pentru interior',
     price: 110,
     category: 'plante',
-    imageUrl: 'https://source.unsplash.com/800x600/?monstera,plant',
+    imageUrl: 'https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80',
     stock: 7,
     isAvailable: true,
     createdAt: new Date().toISOString()
@@ -149,7 +149,7 @@ const createProducts = () => [
     description: 'Compozitie exuberanta pentru evenimente',
     price: 145,
     category: 'mix',
-    imageUrl: 'https://source.unsplash.com/800x600/?colorful-flowers,bouquet',
+    imageUrl: 'https://images.unsplash.com/photo-1487530811015-780780169a86?w=800&q=80',
     stock: 6,
     isAvailable: true,
     createdAt: new Date().toISOString()
