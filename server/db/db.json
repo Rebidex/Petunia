@@ -1,0 +1,277 @@
+{
+  "users": [
+    {
+      "id": "a6509142-47c7-461c-8d09-fd1c50faab00",
+      "name": "Admin Petunia",
+      "email": "admin@florishop.me",
+      "password": "$2a$10$AOGGqJgtmrUQvjPPU3qPyeEjHpQaujTRy8OXK5HXlSLWDErP1G.XG",
+      "role": "admin",
+      "createdAt": "2026-05-10T09:36:09.904Z"
+    },
+    {
+      "id": "e5a9ff9d-c9ca-4878-bf60-dca4374a3d1c",
+      "name": "Ion Popescu",
+      "email": "ion@test.com",
+      "password": "$2a$10$oLujV4S1J1bCrgEO.3TK4.6.tMqnP8kNpF7Kj0EN73CBOWKW2yXwi",
+      "role": "client",
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "dfc7b0c7-edcd-48b3-a2fa-5bb2c9ebd6cd",
+      "name": "Maria Ionescu",
+      "email": "maria@test.com",
+      "password": "$2a$10$EsP9PCjKffd00hC59YSB.uSRWygHBib1Ac6SbMhbGFvQIMinREvaK",
+      "role": "client",
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "dc44f21a-e766-4d37-b392-ae10dfbaf1d5",
+      "name": "Buchet Petunia Romantic",
+      "description": "12 trandafiri rosii cu eucalipt proaspat",
+      "price": 89.99,
+      "category": "trandafiri",
+      "imageUrl": "https://images.unsplash.com/photo-1520763185298-1b434c919102?w=400&q=80",
+      "stock": 15,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "c87bc689-abe4-4ade-91bd-7d065565709b",
+      "name": "Buchet Primavara Pastel",
+      "description": "Mix de lalele si gypsophila",
+      "price": 74.5,
+      "category": "lalele",
+      "imageUrl": "https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=400&q=80",
+      "stock": 20,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "07f504e3-f3fe-4806-a0a5-d8c118b6102c",
+      "name": "Buchet White Grace",
+      "description": "Trandafiri albi si irisi intr-un ambalaj ivoire",
+      "price": 96,
+      "category": "mix",
+      "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&q=80",
+      "stock": 8,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "33c3a509-1619-4a21-abcf-9957805a9bcf",
+      "name": "Bujori Deluxe",
+      "description": "Bujori premium in nuante blush",
+      "price": 129,
+      "category": "bujori",
+      "imageUrl": "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&q=80",
+      "stock": 10,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "eba519e9-af7b-4d97-bd6a-4824229d9aa7",
+      "name": "Crizanteme vesele",
+      "description": "Aranjament colorat pentru orice ocazie",
+      "price": 59.99,
+      "category": "crizanteme",
+      "imageUrl": "https://images.unsplash.com/photo-1572451479139-6a308211d8be?w=400&q=80",
+      "stock": 25,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "ab2d14a0-99ff-4f46-80fc-8527547661db",
+      "name": "Iris Royal Blue",
+      "description": "Iriși albastri cu accent natural verde",
+      "price": 69,
+      "category": "iris",
+      "imageUrl": "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400&q=80",
+      "stock": 18,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "4e03a7d2-d256-439a-8ed3-da71aba2d3c3",
+      "name": "Eucalipt Fresh Touch",
+      "description": "Aranjament minimalist cu eucalipt si flori albe",
+      "price": 54,
+      "category": "verdeata",
+      "imageUrl": "https://images.unsplash.com/photo-1526045478516-99145907023c?w=400&q=80",
+      "stock": 30,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "12f2da8c-9ab4-476e-8a66-579c3da067d2",
+      "name": "Buchet Sunset",
+      "description": "Mix de trandafiri, lalele si crizanteme in tonuri calde",
+      "price": 99.5,
+      "category": "mix",
+      "imageUrl": "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?w=400&q=80",
+      "stock": 12,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "2de612a0-7ceb-4245-915b-75eb14231d2e",
+      "name": "Planta in ghiveci Monstera",
+      "description": "Planta decorativa pentru interior",
+      "price": 110,
+      "category": "plante",
+      "imageUrl": "https://images.unsplash.com/photo-1463320726281-696a485928c7?w=400&q=80",
+      "stock": 7,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "9a5cf0e2-8627-4e42-b11d-11b2965e48ce",
+      "name": "Buchet Festival",
+      "description": "Compozitie exuberanta pentru evenimente",
+      "price": 145,
+      "category": "mix",
+      "imageUrl": "https://images.unsplash.com/photo-1487530811015-780780169a86?w=400&q=80",
+      "stock": 6,
+      "isAvailable": true,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "394efc3c-7c7e-4bcf-94f5-db71e0b5d858",
+      "userId": "e5a9ff9d-c9ca-4878-bf60-dca4374a3d1c",
+      "customerName": "Ion Popescu",
+      "customerPhone": "0742000000",
+      "deliveryAddress": "Str. Florilor 12, Cluj-Napoca",
+      "deliveryDate": "2026-06-15",
+      "items": [
+        {
+          "productId": "dc44f21a-e766-4d37-b392-ae10dfbaf1d5",
+          "name": "Buchet Petunia Romantic",
+          "price": 89.99,
+          "quantity": 2
+        }
+      ],
+      "totalPrice": 179.98,
+      "status": "pending",
+      "note": "Adaugati un mesaj de la multi ani.",
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "efee68dc-7de6-422f-962d-ab28926dc5cb",
+      "userId": "dfc7b0c7-edcd-48b3-a2fa-5bb2c9ebd6cd",
+      "customerName": "Maria Ionescu",
+      "customerPhone": "0733000000",
+      "deliveryAddress": "Bd. Republicii 100, Bucuresti",
+      "deliveryDate": "2026-06-18",
+      "items": [
+        {
+          "productId": "33c3a509-1619-4a21-abcf-9957805a9bcf",
+          "name": "Bujori Deluxe",
+          "price": 129,
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 129,
+      "status": "confirmed",
+      "note": "",
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "706cc4b7-3b9b-44c4-937a-a4ba3a3f9b02",
+      "userId": "e5a9ff9d-c9ca-4878-bf60-dca4374a3d1c",
+      "customerName": "Ion Popescu",
+      "customerPhone": "0742000000",
+      "deliveryAddress": "Str. Dacia 20, Iasi",
+      "deliveryDate": "2026-06-20",
+      "items": [
+        {
+          "productId": "c87bc689-abe4-4ade-91bd-7d065565709b",
+          "name": "Buchet Primavara Pastel",
+          "price": 74.5,
+          "quantity": 1
+        },
+        {
+          "productId": "eba519e9-af7b-4d97-bd6a-4824229d9aa7",
+          "name": "Crizanteme vesele",
+          "price": 59.99,
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 134.49,
+      "status": "delivered",
+      "note": "Livrare dupa ora 16:00",
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "10a82ad1-54df-4aa3-8d7c-86077150e922",
+      "userId": "e5a9ff9d-c9ca-4878-bf60-dca4374a3d1c",
+      "customerName": "Ion Popescu",
+      "customerPhone": "0742111111",
+      "deliveryAddress": "Str Test 1, Cluj",
+      "deliveryDate": "2026-06-30",
+      "items": [
+        {
+          "price": 89.99,
+          "quantity": 1,
+          "productId": "dc44f21a-e766-4d37-b392-ae10dfbaf1d5",
+          "name": "Buchet Petunia Romantic"
+        }
+      ],
+      "totalPrice": 89.99,
+      "status": "pending",
+      "note": "test",
+      "createdAt": "2026-05-10T09:41:14.779Z"
+    }
+  ],
+  "bouquets": [
+    {
+      "id": "a597d7ba-1bac-4830-ad3b-6e787a39a3d7",
+      "userId": "e5a9ff9d-c9ca-4878-bf60-dca4374a3d1c",
+      "name": "Buchetul meu special",
+      "flowers": [
+        {
+          "flower": "Trandafir rosu",
+          "quantity": 5,
+          "color": "#e63946"
+        },
+        {
+          "flower": "Lalele albe",
+          "quantity": 3,
+          "color": "#f1faee"
+        }
+      ],
+      "wrapColor": "#a8dadc",
+      "totalStems": 8,
+      "estimatedPrice": 65,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    },
+    {
+      "id": "5bc284a5-8228-4b35-b5ee-454784d59191",
+      "userId": "dfc7b0c7-edcd-48b3-a2fa-5bb2c9ebd6cd",
+      "name": "Buchet elegant",
+      "flowers": [
+        {
+          "flower": "Bujor",
+          "quantity": 4,
+          "color": "#ffb4a2"
+        },
+        {
+          "flower": "Iris",
+          "quantity": 2,
+          "color": "#7b2cbf"
+        },
+        {
+          "flower": "Eucalipt",
+          "quantity": 3,
+          "color": "#84a98c"
+        }
+      ],
+      "wrapColor": "#f7cad0",
+      "totalStems": 9,
+      "estimatedPrice": 60,
+      "createdAt": "2026-05-10T09:36:09.905Z"
+    }
+  ]
+}

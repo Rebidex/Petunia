@@ -1,0 +1,11 @@
+{
+  "name": "petunia-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\" \"npm run dev --prefix admin\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
