@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import api from '../api/axios'
 import ProductCard from '../components/ProductCard'
+import ChatbotRecommend from '../components/ChatbotRecommend'
 
 const Catalog = () => {
   const [products, setProducts] = useState([])
@@ -49,6 +50,8 @@ const Catalog = () => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+
+      <ChatbotRecommend products={products} />
     </div>
   )
 }
