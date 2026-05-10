@@ -27,7 +27,7 @@
             "url": "{{baseUrl}}/auth/register",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test+postman@petunia.me\",\n  \"password\": \"Test123!\"\n}"
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test+postman@petunia.page\",\n  \"password\": \"Test123!\"\n}"
             }
           }
         },
