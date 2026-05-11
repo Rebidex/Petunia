@@ -15,18 +15,24 @@ export const CartProvider = ({ children }) => {
   }
 
   const addToCart = (item) => {
+    const requestedQty = item.quantity || 1
+    const stockLimit = Number.isFinite(item.stock) ? item.stock : null
     const existing = cartItems.find((entry) => entry.productId === item.productId)
+
     if (existing) {
+      const nextQty = existing.quantity + requestedQty
+      const finalQty = stockLimit != null ? Math.min(nextQty, stockLimit) : nextQty
+      if (stockLimit != null && finalQty <= 0) return
       const updated = cartItems.map((entry) =>
-        entry.productId === item.productId
-          ? { ...entry, quantity: entry.quantity + (item.quantity || 1) }
-          : entry
+        entry.productId === item.productId ? { ...entry, quantity: finalQty } : entry
       )
       persist(updated)
       return
     }
 
-    persist([...cartItems, { ...item, quantity: item.quantity || 1 }])
+    if (stockLimit != null && stockLimit <= 0) return
+    const initialQty = stockLimit != null ? Math.min(requestedQty, stockLimit) : requestedQty
+    persist([...cartItems, { ...item, quantity: initialQty }])
   }
 
   const removeFromCart = (productId) => {

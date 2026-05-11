@@ -40,12 +40,16 @@ const ProductDetail = () => {
               productId: product.id,
               name: product.name,
               price: product.price,
-              quantity: 1
+              quantity: 1,
+              stock: product.stock
             })
           }
-          className="rounded-lg bg-pink-500 px-6 py-2 font-semibold text-white hover:bg-pink-600"
+          disabled={product.stock <= 0}
+          className={`rounded-lg px-6 py-2 font-semibold text-white ${
+            product.stock <= 0 ? 'bg-slate-300' : 'bg-pink-500 hover:bg-pink-600'
+          }`}
         >
-          Adauga in cos
+          {product.stock <= 0 ? 'Stoc epuizat' : 'Adauga in cos'}
         </button>
       </div>
     </section>

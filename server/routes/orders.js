@@ -53,6 +53,40 @@ router.post('/', authenticate, async (req, res) => {
       return res.status(400).json({ error: 'Datele comenzii sunt incomplete' })
     }
 
+    const normalizedItems = items.map((item) => ({
+      productId: String(item.productId),
+      name: String(item.name || '').trim(),
+      price: Number(item.price) || 0,
+      quantity: Number(item.quantity) || 0
+    }))
+
+    const stockIssues = []
+    normalizedItems.forEach((item) => {
+      const product = db.data.products.find((entry) => entry.id === item.productId)
+      if (!product) {
+        stockIssues.push(`${item.name || 'Produs'} nu exista`)
+        return
+      }
+      if (item.quantity <= 0) {
+        stockIssues.push(`${product.name} are cantitate invalida`)
+        return
+      }
+      if (product.stock < item.quantity) {
+        stockIssues.push(`${product.name} are stoc insuficient`)
+      }
+    })
+
+    if (stockIssues.length) {
+      return res.status(400).json({ error: `Stoc insuficient: ${stockIssues.join(', ')}` })
+    }
+
+    normalizedItems.forEach((item) => {
+      const product = db.data.products.find((entry) => entry.id === item.productId)
+      if (product) {
+        product.stock = Math.max(0, product.stock - item.quantity)
+      }
+    })
+
     const order = {
       id: uuidv4(),
       userId: req.user.id,
@@ -60,7 +94,7 @@ router.post('/', authenticate, async (req, res) => {
       customerPhone: String(customerPhone).trim(),
       deliveryAddress: String(deliveryAddress).trim(),
       deliveryDate,
-      items,
+      items: normalizedItems,
       totalPrice: Number(totalPrice) || 0,
       status: 'pending',
       note: note ? String(note).trim() : '',

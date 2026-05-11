@@ -25,12 +25,16 @@ const ProductCard = ({ product }) => {
                 productId: product.id,
                 name: product.name,
                 price: product.price,
-                quantity: 1
+                quantity: 1,
+                stock: product.stock
               })
             }
-            className="flex-1 rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white hover:bg-pink-600"
+            disabled={product.stock <= 0}
+            className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold text-white ${
+              product.stock <= 0 ? 'bg-slate-300' : 'bg-pink-500 hover:bg-pink-600'
+            }`}
           >
-            Adauga
+            {product.stock <= 0 ? 'Stoc epuizat' : 'Adauga'}
           </button>
         </div>
       </div>
