@@ -20,7 +20,7 @@ const Register = () => {
 
     try {
       await register(name, email, password)
-      showToast('Contul tau a fost creat cu succes! Bun venit la FloriShop 🌸')
+      showToast('Contul tau a fost creat cu succes! Bun venit la Petunia 🌸')
       setTimeout(() => navigate('/'), 2000)
     } catch (requestError) {
       setError(requestError.response?.data?.error || 'Inregistrare esuata')
