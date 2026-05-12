@@ -43,8 +43,12 @@ export const AuthProvider = ({ children }) => {
     setUser(null)
   }
 
+  const updateUser = (newData) => {
+    setUser((prev) => ({ ...prev, ...newData }))
+  }
+
   const value = useMemo(
-    () => ({ user, token, isAuthenticated: Boolean(token), login, register, logout }),
+    () => ({ user, token, isAuthenticated: Boolean(token), login, register, logout, updateUser }),
     [user, token]
   )
 

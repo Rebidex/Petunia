@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -12,6 +13,43 @@ import Payment from './pages/Payment'
 import OrderConfirm from './pages/OrderConfirm'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import MyOrders from './pages/MyOrders'
+import Profile from './pages/Profile'
+import CookiePolicy from './pages/CookiePolicy'
+import TermsAndConditions from './pages/TermsAndConditions'
+
+const CookieBanner = () => {
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+    return !localStorage.getItem('cookiesAccepted')
+  })
+
+  if (!visible) {
+    return null
+  }
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 flex flex-wrap items-center justify-between gap-4 bg-slate-800 px-6 py-4 text-white">
+      <p className="text-sm">
+        Folosim cookie-uri pentru a-ti oferi o experienta mai buna.{' '}
+        <Link to="/cookie-policy" className="underline">
+          Afla mai multe
+        </Link>
+      </p>
+      <button
+        onClick={() => {
+          localStorage.setItem('cookiesAccepted', 'true')
+          setVisible(false)
+        }}
+        className="flex-shrink-0 rounded-lg bg-pink-500 px-4 py-1.5 text-sm text-white hover:bg-pink-600"
+      >
+        Accept
+      </button>
+    </div>
+  )
+}
 
 const App = () => {
   return (
@@ -43,8 +81,27 @@ const App = () => {
           <Route path="/order-confirm" element={<OrderConfirm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/my-orders"
+            element={
+              <ProtectedRoute>
+                <MyOrders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
         </Routes>
       </main>
+      <CookieBanner />
       <Footer />
     </div>
   )

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import FlowerChip from '../components/FlowerChip'
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
@@ -22,14 +23,43 @@ const getDefaultState = () => ({
   wrapColor: wrapColors[0]
 })
 
+const buildFlowersState = (flowers) => {
+  const nextFlowers = flowerOptions.reduce((acc, flower) => ({ ...acc, [flower.name]: 0 }), {})
+  if (!Array.isArray(flowers)) {
+    return nextFlowers
+  }
+
+  flowers.forEach((item) => {
+    if (item?.flower) {
+      const qty = Number(item.quantity)
+      nextFlowers[item.flower] = Number.isFinite(qty) ? qty : 0
+    }
+  })
+
+  return nextFlowers
+}
+
 const Builder = () => {
   const { isAuthenticated } = useAuth()
-  const { addToCart } = useCart()
+  const { addToCart, updateCartItem } = useCart()
+  const location = useLocation()
+  const navigate = useNavigate()
   const [state, setState] = useState(getDefaultState)
   const [name, setName] = useState('Buchet personalizat Petunia')
   const [message, setMessage] = useState('')
+  const [editingCartId, setEditingCartId] = useState(null)
 
   useEffect(() => {
+    if (location.state?.editCartId) {
+      setEditingCartId(location.state.editCartId)
+      setName(location.state.name || 'Buchet personalizat Petunia')
+      setState({
+        flowers: buildFlowersState(location.state.flowers),
+        wrapColor: location.state.wrapColor || wrapColors[0]
+      })
+      return
+    }
+
     const raw = localStorage.getItem('builderState')
     if (!raw) return
 
@@ -132,6 +162,25 @@ const Builder = () => {
     setMessage('Buchetul custom a fost adaugat in cos.')
   }
 
+  const handleUpdateCart = () => {
+    setMessage('')
+
+    if (selectedFlowers.length === 0) {
+      setMessage('Selecteaza cel putin o floare.')
+      return
+    }
+
+    updateCartItem(editingCartId, {
+      name: name || `Buchet personalizat (${totalStems} fire)`,
+      price: Number(estimatedPrice.toFixed(2)),
+      flowers: selectedFlowers,
+      wrapColor: state.wrapColor,
+      type: 'custom-bouquet'
+    })
+
+    navigate('/cart')
+  }
+
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       <section className="space-y-4 lg:col-span-2">
@@ -202,12 +251,21 @@ const Builder = () => {
         >
           Salveaza buchetul
         </button>
-        <button
-          onClick={handleAddToCart}
-          className="w-full rounded-lg bg-pink-500 px-4 py-2 font-semibold text-white hover:bg-pink-600"
-        >
-          Adauga in cos
-        </button>
+        {editingCartId ? (
+          <button
+            onClick={handleUpdateCart}
+            className="w-full rounded-lg bg-pink-500 px-4 py-2 font-semibold text-white hover:bg-pink-600"
+          >
+            Actualizeaza in cos
+          </button>
+        ) : (
+          <button
+            onClick={handleAddToCart}
+            className="w-full rounded-lg bg-pink-500 px-4 py-2 font-semibold text-white hover:bg-pink-600"
+          >
+            Adauga in cos
+          </button>
+        )}
 
         {message && <p className="text-sm text-slate-600">{message}</p>}
       </aside>

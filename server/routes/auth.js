@@ -34,6 +34,7 @@ router.post('/register', async (req, res) => {
       name: String(name).trim(),
       email: normalizedEmail,
       password: hashedPassword,
+      phone: '',
       role: 'client',
       createdAt: new Date().toISOString()
     }
@@ -86,7 +87,12 @@ router.get('/me', authenticate, async (req, res) => {
       return res.status(404).json({ error: 'Utilizatorul nu a fost gasit' })
     }
 
-    return res.json({ user: sanitizeUser(user) })
+    const normalizedUser = {
+      ...user,
+      phone: typeof user.phone === 'string' ? user.phone : ''
+    }
+
+    return res.json({ user: sanitizeUser(normalizedUser) })
   } catch {
     return res.status(500).json({ error: 'Eroare la obtinerea profilului' })
   }

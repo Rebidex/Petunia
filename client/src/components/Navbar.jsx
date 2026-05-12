@@ -45,7 +45,16 @@ const Navbar = () => {
           </Link>
 
           {isAuthenticated ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <Link
+                to="/my-orders"
+                className="hidden text-sm font-semibold text-slate-600 hover:text-slate-900 md:inline"
+              >
+                Comenzile mele
+              </Link>
+              <Link to="/profile" className="hidden text-sm font-semibold text-slate-600 hover:text-slate-900 md:inline">
+                Profilul meu
+              </Link>
               <span className="hidden text-sm font-medium text-slate-700 md:inline">{user?.name}</span>
               <button
                 onClick={logout}

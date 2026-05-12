@@ -17,7 +17,9 @@ router.get('/', authenticate, adminOnly, async (req, res) => {
 
 router.get('/my', authenticate, async (req, res) => {
   try {
-    const orders = db.data.orders.filter((order) => order.userId === req.user.id)
+    const orders = db.data.orders
+      .filter((order) => order.userId === req.user.id)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     return res.json({ orders })
   } catch {
     return res.status(500).json({ error: 'Eroare la obtinerea comenzilor tale' })
@@ -53,39 +55,41 @@ router.post('/', authenticate, async (req, res) => {
       return res.status(400).json({ error: 'Datele comenzii sunt incomplete' })
     }
 
-    const normalizedItems = items.map((item) => ({
-      productId: String(item.productId),
-      name: String(item.name || '').trim(),
-      price: Number(item.price) || 0,
-      quantity: Number(item.quantity) || 0
-    }))
+    const orderItems = items.map((item) => {
+      const quantity = Number(item.quantity)
 
-    const stockIssues = []
-    normalizedItems.forEach((item) => {
-      const product = db.data.products.find((entry) => entry.id === item.productId)
-      if (!product) {
-        stockIssues.push(`${item.name || 'Produs'} nu exista`)
-        return
-      }
-      if (item.quantity <= 0) {
-        stockIssues.push(`${product.name} are cantitate invalida`)
-        return
-      }
-      if (product.stock < item.quantity) {
-        stockIssues.push(`${product.name} are stoc insuficient`)
+      return {
+        productId: String(item.productId || '').trim(),
+        name: String(item.name || '').trim(),
+        price: Number(item.price) || 0,
+        quantity: Number.isFinite(quantity) ? quantity : 0
       }
     })
 
-    if (stockIssues.length) {
-      return res.status(400).json({ error: `Stoc insuficient: ${stockIssues.join(', ')}` })
+    for (const item of orderItems) {
+      if (!item.productId || !Number.isFinite(item.quantity) || item.quantity <= 0) {
+        return res.status(400).json({ error: 'Cantitatile produselor sunt invalide' })
+      }
     }
 
-    normalizedItems.forEach((item) => {
-      const product = db.data.products.find((entry) => entry.id === item.productId)
-      if (product) {
-        product.stock = Math.max(0, product.stock - item.quantity)
+    const stockUpdates = []
+    for (const item of orderItems) {
+      if (item.productId.startsWith('custom-')) {
+        continue
       }
-    })
+
+      const product = db.data.products.find((entry) => entry.id === item.productId)
+      if (!product) {
+        return res.status(400).json({ error: `Produs inexistent: ${item.name || item.productId}` })
+      }
+
+      const stockValue = Number(product.stock)
+      if (Number.isFinite(stockValue) && item.quantity > stockValue) {
+        return res.status(400).json({ error: `Stoc insuficient pentru ${product.name}` })
+      }
+
+      stockUpdates.push({ product, quantity: item.quantity })
+    }
 
     const order = {
       id: uuidv4(),
@@ -94,12 +98,17 @@ router.post('/', authenticate, async (req, res) => {
       customerPhone: String(customerPhone).trim(),
       deliveryAddress: String(deliveryAddress).trim(),
       deliveryDate,
-      items: normalizedItems,
+      items: orderItems,
       totalPrice: Number(totalPrice) || 0,
       status: 'pending',
       note: note ? String(note).trim() : '',
       createdAt: new Date().toISOString()
     }
+
+    stockUpdates.forEach(({ product, quantity }) => {
+      const nextStock = Number(product.stock) - quantity
+      product.stock = Number.isFinite(nextStock) ? Math.max(0, nextStock) : product.stock
+    })
 
     db.data.orders.push(order)
     await db.write()
