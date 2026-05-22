@@ -142,6 +142,9 @@ const Builder = () => {
       wrapColor: state.wrapColor
     })
     setMessage('Nu esti logat, buchetul a fost adaugat in cos.')
+    setState(getDefaultState())
+    setName('Buchet personalizat Petunia')
+    localStorage.removeItem('builderState')
   }
 
   const handleAddToCart = () => {
@@ -160,6 +163,9 @@ const Builder = () => {
       wrapColor: state.wrapColor
     })
     setMessage('Buchetul custom a fost adaugat in cos.')
+    setState(getDefaultState())
+    setName('Buchet personalizat Petunia')
+    localStorage.removeItem('builderState')
   }
 
   const handleUpdateCart = () => {
@@ -182,19 +188,19 @@ const Builder = () => {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
+    <div className="grid gap-6 lg:grid-cols-3 animate-page">
       <section className="space-y-4 lg:col-span-2">
-        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-          <label className="mb-2 block text-sm font-semibold text-slate-700">Nume buchet</label>
+        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+          <label className="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-355">Nume buchet</label>
           <input
             value={name}
             onChange={(event) => setName(event.target.value)}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2"
+            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 dark:bg-slate-900 dark:border-slate-750 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
           />
         </div>
 
-        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-          <h1 className="mb-3 text-2xl font-bold text-slate-800">Builder Buchet Petunia</h1>
+        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+          <h1 className="mb-3 text-2xl font-bold text-slate-800 dark:text-slate-100">Builder Buchet Petunia</h1>
           <div className="grid gap-3 sm:grid-cols-2">
             {flowerOptions.map((flower) => (
               <FlowerChip
@@ -210,15 +216,15 @@ const Builder = () => {
       </section>
 
       <aside className="space-y-4">
-        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm">
-          <p className="mb-2 text-sm font-semibold text-slate-700">Culoare ambalaj</p>
+        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-800">
+          <p className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Culoare ambalaj</p>
           <div className="flex flex-wrap gap-2">
             {wrapColors.map((color) => (
               <button
                 key={color}
                 onClick={() => setState((prev) => ({ ...prev, wrapColor: color }))}
-                className={`h-8 w-8 rounded-full border-2 ${
-                  state.wrapColor === color ? 'border-slate-800' : 'border-slate-200'
+                className={`h-8 w-8 rounded-full border-2 transition-transform ${
+                  state.wrapColor === color ? 'border-slate-800 scale-110 dark:border-slate-100' : 'border-slate-200 dark:border-slate-800'
                 }`}
                 style={{ backgroundColor: color }}
               />
@@ -226,12 +232,12 @@ const Builder = () => {
           </div>
         </div>
 
-        <div className="rounded-xl border border-slate-100 bg-white p-4 shadow-sm" style={{ background: state.wrapColor }}>
-          <h2 className="mb-2 text-lg font-bold text-slate-800">Preview live</h2>
+        <div className="rounded-xl border border-slate-100 p-4 shadow-sm transition-colors text-slate-900" style={{ background: state.wrapColor }}>
+          <h2 className="mb-2 text-lg font-bold text-slate-900">Preview live</h2>
           {selectedFlowers.length === 0 ? (
-            <p className="text-sm text-slate-600">Nicio floare selectata.</p>
+            <p className="text-sm text-slate-700">Nicio floare selectata.</p>
           ) : (
-            <ul className="space-y-1 text-sm text-slate-700">
+            <ul className="space-y-1 text-sm text-slate-800">
               {selectedFlowers.map((item) => (
                 <li key={item.flower}>
                   {item.flower}: {item.quantity} x {item.price} RON
@@ -239,7 +245,7 @@ const Builder = () => {
               ))}
             </ul>
           )}
-          <div className="mt-3 border-t border-slate-300 pt-2 text-sm font-semibold text-slate-900">
+          <div className="mt-3 border-t border-slate-400 pt-2 text-sm font-semibold text-slate-950">
             <p>Total fire: {totalStems}</p>
             <p>Pret estimat: {estimatedPrice.toFixed(2)} RON</p>
           </div>
@@ -247,27 +253,27 @@ const Builder = () => {
 
         <button
           onClick={handleSaveBouquet}
-          className="w-full rounded-lg border border-pink-500 px-4 py-2 font-semibold text-pink-600 hover:bg-pink-50"
+          className="w-full rounded-lg border border-pink-500 px-4 py-2 font-semibold text-pink-600 hover:bg-pink-50 dark:text-pink-400 dark:border-pink-500 dark:hover:bg-pink-950/20 transition-colors"
         >
           Salveaza buchetul
         </button>
         {editingCartId ? (
           <button
             onClick={handleUpdateCart}
-            className="w-full rounded-lg bg-pink-500 px-4 py-2 font-semibold text-white hover:bg-pink-600"
+            className="w-full rounded-lg bg-pink-500 px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors"
           >
             Actualizeaza in cos
           </button>
         ) : (
           <button
             onClick={handleAddToCart}
-            className="w-full rounded-lg bg-pink-500 px-4 py-2 font-semibold text-white hover:bg-pink-600"
+            className="w-full rounded-lg bg-pink-500 px-4 py-2 font-semibold text-white hover:bg-pink-600 transition-colors"
           >
             Adauga in cos
           </button>
         )}
 
-        {message && <p className="text-sm text-slate-600">{message}</p>}
+        {message && <p className="text-sm text-slate-600 dark:text-slate-400 text-center">{message}</p>}
       </aside>
     </div>
   )

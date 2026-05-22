@@ -21,6 +21,19 @@ router.post('/register', async (req, res) => {
     }
 
     const normalizedEmail = String(email).toLowerCase().trim()
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(normalizedEmail)) {
+      return res.status(400).json({ error: 'Formatul emailului este invalid.' })
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        error: 'Parola trebuie sa aiba cel putin 8 caractere si sa contina o litera mare, o litera mica, un numar si un caracter special (@$!%*?&).'
+      })
+    }
+
     const exists = db.data.users.find((user) => user.email === normalizedEmail)
 
     if (exists) {

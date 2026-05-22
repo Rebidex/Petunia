@@ -4,8 +4,64 @@
 
 :root {
   font-family: 'Inter', sans-serif;
+  
+  /* Light theme pink color values */
+  --color-pink-50: 253 242 248;   /* #fdf2f8 */
+  --color-pink-100: 251 207 232;  /* #fbcfe8 */
+  --color-pink-200: 24bcbe;
+  --color-pink-300: 249 168 212;
+  --color-pink-400: 244 114 182;
+  --color-pink-500: 236 72 153;   /* #ec4899 */
+  --color-pink-600: 219 39 119;   /* #db2777 */
+  --color-pink-700: 190 24 93;    /* #be185d */
+  --color-pink-800: 157 23 77;
+  --color-pink-900: 131 24 67;
+  --color-brand-pink: 233 30 140; /* #e91e8c */
+}
+
+.dark {
+  /* Dark theme purple color values */
+  --color-pink-50: 88 28 135;     /* purple-900 */
+  --color-pink-100: 107 33 168;   /* purple-800 */
+  --color-pink-200: 126 34 206;   /* purple-700 */
+  --color-pink-300: 147 51 234;   /* purple-600 */
+  --color-pink-400: 168 85 247;   /* purple-500 */
+  --color-pink-500: 139 92 246;   /* purple-500: #8b5cf6 */
+  --color-pink-600: 124 58 237;   /* purple-600: #7c3aed */
+  --color-pink-700: 109 40 217;   /* purple-700: #6d28d9 */
+  --color-pink-800: 91 33 182;    /* purple-800 */
+  --color-pink-900: 76 29 149;    /* purple-900 */
+  --color-brand-pink: 139 92 246; /* purple-500 */
 }
 
 body {
-  @apply bg-slate-50 text-slate-800;
+  @apply bg-slate-50 text-slate-800 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100;
 }
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page {
+  animation: pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3D Card flip utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+

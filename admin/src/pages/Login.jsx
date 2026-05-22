@@ -8,8 +8,8 @@ const Login = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
   const { toast, showToast, hideToast } = useToast()
-  const [email, setEmail] = useState('admin@florishop.me')
-  const [password, setPassword] = useState('Admin123!')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
   const handleSubmit = async (event) => {

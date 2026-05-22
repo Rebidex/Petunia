@@ -17,6 +17,7 @@ import MyOrders from './pages/MyOrders'
 import Profile from './pages/Profile'
 import CookiePolicy from './pages/CookiePolicy'
 import TermsAndConditions from './pages/TermsAndConditions'
+import NotFound from './pages/NotFound'
 
 const CookieBanner = () => {
   const [visible, setVisible] = useState(() => {
@@ -53,7 +54,7 @@ const CookieBanner = () => {
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-200">
       <Navbar />
       <main className="mx-auto min-h-[70vh] max-w-6xl px-4 py-8">
         <Routes>
@@ -99,6 +100,7 @@ const App = () => {
           />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <CookieBanner />

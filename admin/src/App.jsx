@@ -7,6 +7,7 @@ import Products from './pages/Products'
 import Orders from './pages/Orders'
 import Users from './pages/Users'
 import { useAuth } from './context/AuthContext'
+import NotFound from './pages/NotFound'
 
 const ProtectedLayout = ({ children }) => {
   const { isAuthenticated } = useAuth()
@@ -62,6 +63,7 @@ const App = () => {
           </ProtectedLayout>
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

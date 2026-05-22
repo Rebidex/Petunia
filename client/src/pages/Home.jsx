@@ -20,7 +20,7 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 animate-page">
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-pink-500 via-pink-400 to-emerald-400 p-8 text-white shadow-sm">
         <div className="max-w-2xl space-y-4">
           <h1 className="text-3xl font-extrabold md:text-5xl">Petunia - buchete care spun povesti</h1>
@@ -28,10 +28,10 @@ const Home = () => {
             Comanda rapid din catalog sau creeaza propriul buchet in Builder cu preview live.
           </p>
           <div className="flex gap-3">
-            <Link to="/catalog" className="rounded-lg bg-white px-5 py-2 font-semibold text-pink-600">
+            <Link to="/catalog" className="rounded-lg bg-white px-5 py-2 font-semibold text-pink-600 hover:bg-slate-100 transition-colors">
               Vezi Catalogul
             </Link>
-            <Link to="/builder" className="rounded-lg border border-white px-5 py-2 font-semibold text-white">
+            <Link to="/builder" className="rounded-lg border border-white px-5 py-2 font-semibold text-white hover:bg-white/10 transition-colors">
               Creeaza Buchet
             </Link>
           </div>
@@ -39,7 +39,7 @@ const Home = () => {
       </section>
 
       <section>
-        <h2 className="mb-4 text-2xl font-bold text-slate-800">Produse populare</h2>
+        <h2 className="mb-4 text-2xl font-bold text-slate-800 dark:text-slate-100">Produse populare</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

@@ -53,13 +53,13 @@ const Checkout = () => {
   }
 
   return (
-    <div className="mx-auto max-w-2xl rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
-      <h1 className="mb-4 text-2xl font-bold text-slate-800">Checkout</h1>
+    <div className="mx-auto max-w-2xl rounded-xl border border-slate-100 bg-white p-6 shadow-sm dark:bg-slate-900 dark:border-slate-800 animate-page">
+      <h1 className="mb-4 text-2xl font-bold text-slate-800 dark:text-slate-100">Checkout</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="Nume complet"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 dark:bg-slate-900 dark:border-slate-750 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-purple-500"
           required
           value={form.customerName}
           onChange={(event) => setForm((prev) => ({ ...prev, customerName: event.target.value }))}
@@ -67,14 +67,14 @@ const Checkout = () => {
         <input
           type="tel"
           placeholder="Telefon"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 dark:bg-slate-900 dark:border-slate-750 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-purple-500"
           required
           value={form.customerPhone}
           onChange={(event) => setForm((prev) => ({ ...prev, customerPhone: event.target.value }))}
         />
         <textarea
           placeholder="Adresa de livrare"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 dark:bg-slate-900 dark:border-slate-750 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-purple-500"
           required
           value={form.deliveryAddress}
           onChange={(event) => setForm((prev) => ({ ...prev, deliveryAddress: event.target.value }))}
@@ -82,21 +82,21 @@ const Checkout = () => {
         <input
           type="date"
           min={minDate}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 dark:bg-slate-900 dark:border-slate-750 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-purple-500"
           required
           value={form.deliveryDate}
           onChange={(event) => setForm((prev) => ({ ...prev, deliveryDate: event.target.value }))}
         />
         <textarea
           placeholder="Nota optionala"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 dark:bg-slate-900 dark:border-slate-750 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-purple-500"
           value={form.note}
           onChange={(event) => setForm((prev) => ({ ...prev, note: event.target.value }))}
         />
 
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {error && <p className="text-sm text-red-500 dark:text-red-400">{error}</p>}
 
-        <button className="w-full rounded-lg bg-pink-500 py-2 font-semibold text-white hover:bg-pink-600">
+        <button className="w-full rounded-lg bg-pink-500 py-2 font-semibold text-white hover:bg-pink-600 transition-colors">
           Trimite catre plata
         </button>
       </form>

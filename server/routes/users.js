@@ -90,6 +90,13 @@ router.put('/me/password', authenticate, async (req, res) => {
       return res.status(400).json({ error: 'Parola curenta este incorecta' })
     }
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    if (!passwordRegex.test(newPassword)) {
+      return res.status(400).json({
+        error: 'Parola noua trebuie sa aiba cel putin 8 caractere si sa contina o litera mare, o litera mica, un numar si un caracter special (@$!%*?&).'
+      })
+    }
+
     const hashed = await bcrypt.hash(newPassword, 10)
     user.password = hashed
     await db.write()

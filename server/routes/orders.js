@@ -119,6 +119,45 @@ router.post('/', authenticate, async (req, res) => {
   }
 })
 
+router.post('/:id/cancel', authenticate, async (req, res) => {
+  try {
+    const order = db.data.orders.find((item) => item.id === req.params.id)
+    if (!order) {
+      return res.status(404).json({ error: 'Comanda nu a fost gasita' })
+    }
+
+    if (order.userId !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Acces interzis la aceasta comanda' })
+    }
+
+    if (order.status !== 'pending') {
+      return res.status(400).json({ error: 'Doar comenzile in asteptare pot fi anulate' })
+    }
+
+    // Restore stock
+    for (const item of order.items) {
+      if (item.productId.startsWith('custom-')) {
+        continue
+      }
+      const product = db.data.products.find((p) => p.id === item.productId)
+      if (product) {
+        const currentStock = Number(product.stock)
+        const restoredQty = Number(item.quantity)
+        if (Number.isFinite(currentStock) && Number.isFinite(restoredQty)) {
+          product.stock = currentStock + restoredQty
+        }
+      }
+    }
+
+    order.status = 'cancelled'
+    await db.write()
+
+    return res.json({ order })
+  } catch {
+    return res.status(500).json({ error: 'Eroare la anularea comenzii' })
+  }
+})
+
 router.patch('/:id/status', authenticate, adminOnly, async (req, res) => {
   try {
     const { status } = req.body
@@ -129,6 +168,23 @@ router.patch('/:id/status', authenticate, adminOnly, async (req, res) => {
     const order = db.data.orders.find((item) => item.id === req.params.id)
     if (!order) {
       return res.status(404).json({ error: 'Comanda nu a fost gasita' })
+    }
+
+    // Restore stock when an order is cancelled (only if it wasn't already cancelled)
+    if (status === 'cancelled' && order.status !== 'cancelled') {
+      for (const item of order.items) {
+        if (item.productId.startsWith('custom-')) {
+          continue
+        }
+        const product = db.data.products.find((p) => p.id === item.productId)
+        if (product) {
+          const currentStock = Number(product.stock)
+          const restoredQty = Number(item.quantity)
+          if (Number.isFinite(currentStock) && Number.isFinite(restoredQty)) {
+            product.stock = currentStock + restoredQty
+          }
+        }
+      }
     }
 
     order.status = status

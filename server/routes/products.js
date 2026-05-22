@@ -8,7 +8,23 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   try {
-    const products = db.data.products.filter((product) => product.isAvailable !== false)
+    const { search, category } = req.query
+    let products = db.data.products.filter((product) => product.isAvailable !== false)
+
+    if (search) {
+      const q = String(search).trim().toLowerCase()
+      products = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(q) ||
+          product.description.toLowerCase().includes(q)
+      )
+    }
+
+    if (category && category !== 'toate') {
+      const cat = String(category).trim().toLowerCase()
+      products = products.filter((product) => product.category.toLowerCase() === cat)
+    }
+
     return res.json({ products })
   } catch {
     return res.status(500).json({ error: 'Eroare la obtinerea produselor' })
