@@ -50,7 +50,7 @@ const createProducts = () => [
   {
     id: uuidv4(),
     name: 'Buchet Petunia Romantic',
-    description: '12 trandafiri rosii cu eucalipt proaspat',
+    description: '11 trandafiri rosii cu eucalipt proaspat',
     price: 89.99,
     category: 'trandafiri',
     imageUrl: 'https://www.floridelux.ro/storage/app/uploads/public/675/6c4/ca2/thumb_103332_700_0_0_0_auto.jpg',
