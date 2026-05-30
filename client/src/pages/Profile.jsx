@@ -3,15 +3,18 @@ import api from '../api/axios'
 import Toast from '../components/Toast'
 import { useToast } from '../hooks/useToast'
 import { useAuth } from '../context/AuthContext'
-import { User, Phone, Mail, ShieldAlert } from 'lucide-react'
+import { useCart } from '../context/CartContext'
+import { User, Phone, Mail, ShieldAlert, Trash2, ShoppingCart } from 'lucide-react'
 
 const Profile = () => {
   const { user, updateUser } = useAuth()
+  const { addToCart } = useCart()
   const { toast, showToast, hideToast } = useToast()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [ordersCount, setOrdersCount] = useState(0)
+  const [savedBouquets, setSavedBouquets] = useState([])
   const [createdAt, setCreatedAt] = useState(user?.createdAt || '')
   
   const [profileForm, setProfileForm] = useState({
@@ -34,14 +37,16 @@ const Profile = () => {
 
     const loadProfile = async () => {
       try {
-        const [userResponse, ordersResponse] = await Promise.all([
+        const [userResponse, ordersResponse, bouquetsResponse] = await Promise.all([
           api.get('/auth/me'), 
-          api.get('/orders/my')
+          api.get('/orders/my'),
+          api.get('/bouquets/my')
         ])
         const apiUser = userResponse.data.user || userResponse.data
         const orders = Array.isArray(ordersResponse.data) 
           ? ordersResponse.data 
           : ordersResponse.data.orders || []
+        const bouquets = bouquetsResponse.data.bouquets || []
 
         if (active) {
           setProfileForm({
@@ -51,6 +56,7 @@ const Profile = () => {
           })
           setCreatedAt(apiUser?.createdAt || '')
           setOrdersCount(orders.length)
+          setSavedBouquets(bouquets)
         }
       } catch {
         if (active) {
@@ -69,6 +75,29 @@ const Profile = () => {
       active = false
     }
   }, [])
+
+  const handleDeleteBouquet = async (id) => {
+    try {
+      await api.delete(`/bouquets/${id}`)
+      setSavedBouquets((prev) => prev.filter((b) => b.id !== id))
+      showToast('Buchetul a fost sters! 🗑️')
+    } catch {
+      showToast('Nu s-a putut sterge buchetul.', 'error')
+    }
+  }
+
+  const handleAddBouquetToCart = (b) => {
+    addToCart({
+      productId: `custom-${Date.now()}`,
+      name: b.name,
+      price: b.estimatedPrice,
+      quantity: 1,
+      type: 'custom-bouquet',
+      flowers: b.flowers,
+      wrapColor: b.wrapColor
+    })
+    showToast('Buchetul personalizat a fost adaugat in cos! 🌸')
+  }
 
   const calculateStrength = () => {
     let score = 0
@@ -224,6 +253,65 @@ const Profile = () => {
           Salveaza modificarile
         </button>
       </form>
+
+      {/* Saved Bouquets Section */}
+      <div className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm dark:bg-slate-900 dark:border-slate-800 space-y-4">
+        <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+          <span>Buchetele mele salvate</span>
+          <span className="rounded-full bg-pink-100 px-2 py-0.5 text-xs font-semibold text-pink-600 dark:bg-pink-950/40 dark:text-pink-400">
+            {savedBouquets.length}
+          </span>
+        </h2>
+        {savedBouquets.length === 0 ? (
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            Nu ai niciun buchet salvat încă. Mergi în secțiunea Builder pentru a crea unul!
+          </p>
+        ) : (
+          <div className="space-y-3">
+            {savedBouquets.map((b) => (
+              <div
+                key={b.id}
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-slate-100 p-4 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/20"
+              >
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="inline-block h-3.5 w-3.5 rounded-full border border-slate-300 shadow-inner"
+                      style={{ backgroundColor: b.wrapColor }}
+                      title={`Ambalaj: ${b.wrapColor}`}
+                    />
+                    <p className="font-semibold text-slate-850 dark:text-slate-100 text-sm">
+                      {b.name}
+                    </p>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    {b.flowers.map((f) => `${f.quantity}x ${f.flower}`).join(', ')} ({b.totalStems} fire)
+                  </p>
+                  <p className="text-xs font-bold text-pink-600 dark:text-purple-400">
+                    {b.estimatedPrice.toFixed(2)} RON
+                  </p>
+                </div>
+                <div className="flex gap-2 self-end sm:self-center">
+                  <button
+                    onClick={() => handleAddBouquetToCart(b)}
+                    className="flex items-center gap-1.5 rounded-lg bg-pink-500 hover:bg-pink-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors"
+                  >
+                    <ShoppingCart className="h-3.5 w-3.5" />
+                    <span>Adaugă în coș</span>
+                  </button>
+                  <button
+                    onClick={() => handleDeleteBouquet(b.id)}
+                    className="flex items-center gap-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-655 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
+                  >
+                    <Trash2 className="h-3.5 w-3.5 text-red-500" />
+                    <span>Șterge</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Password Change Form */}
       <form onSubmit={handlePasswordChange} className="space-y-4 rounded-xl border border-slate-100 bg-white p-6 shadow-sm dark:bg-slate-900 dark:border-slate-800">
